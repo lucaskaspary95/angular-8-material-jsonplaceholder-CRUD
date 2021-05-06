@@ -1,0 +1,34 @@
+table {
+    width: 100%;
+}
+
+table td,
+table th {
+    padding: 1% 2%;
+}
+
+.add-container {
+    width: 70%;
+    display: inline-block;
+}
+
+.add-container>* {
+    width: 100%;
+}
+
+.form-add {
+    position: relative;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tablePosts button {
+    display: inline-block;
+    margin: 5% 0;
+}
+
+.tableAlbuns button {
+    display: inline-block;
+    margin: 0 5%;
+}

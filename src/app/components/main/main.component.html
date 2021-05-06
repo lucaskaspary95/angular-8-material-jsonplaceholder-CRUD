@@ -1,0 +1,165 @@
+<mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Postagens">
+        <mat-card>
+            <form class="form-add">
+
+                <div [formGroup]="addPost" class="add-container">
+                    <mat-form-field>
+                        <input formControlName="title" matInput placeholder="Título">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <textarea formControlName="body" matInput placeholder="Corpo"></textarea>
+                    </mat-form-field>
+
+                </div>
+
+                <button mat-raised-button color="primary" (click)="submitPost()" style="left: 5%;">Salvar Postagem</button>
+            </form>
+
+
+            <div class="mat-elevation-z8 tablePosts">
+                <table mat-table [dataSource]="dataSourcePosts">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Título Column -->
+                    <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef> Título </th>
+                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    </ng-container>
+
+                    <!-- Corpo Column -->
+                    <ng-container matColumnDef="body">
+                        <th mat-header-cell *matHeaderCellDef> Corpo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.body}} </td>
+                    </ng-container>
+
+                    <!-- Corpo Column -->
+                    <ng-container matColumnDef="opt">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element"> <button mat-raised-button (click)="editarPost(element.id);">Editar</button> <button mat-raised-button color="warn" (click)="deletePost(element.id);">Excluir</button></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef=" displayedColumnsPost "></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsPost; "></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20] " showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card>
+
+    </mat-tab>
+    <mat-tab label="Albuns ">
+        <mat-card>
+            <form class="form-add">
+
+                <div [formGroup]="addAlbum" class="add-container">
+                    <mat-form-field>
+                        <input formControlName="title" matInput placeholder="Título">
+                    </mat-form-field>
+
+                </div>
+
+                <button mat-raised-button color="primary" (click)="submitAlbum()" style="left: 5%;">Salvar Album</button>
+            </form>
+
+
+            <div class="mat-elevation-z8 tableAlbuns">
+                <table mat-table [dataSource]="dataSourceAlbuns">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Título Column -->
+                    <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef> Título </th>
+                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    </ng-container>
+
+                    <!-- Corpo Column -->
+                    <ng-container matColumnDef="opt">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element"> <button mat-raised-button (click)="editarAlbum (element.id);">Editar</button> <button mat-raised-button color="warn" (click)="deleteAlbum(element.id);">Excluir</button></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef=" displayedColumnsAlbum "></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsAlbum ; "></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20] " showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="To-Dos ">
+        <mat-card>
+            <form class="form-add">
+
+                <div [formGroup]="addTodo" class="add-container">
+                    <mat-form-field>
+                        <input formControlName="title" matInput placeholder="Título">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Completo?</mat-label>
+                        <mat-select formControlName="completed">
+                            <mat-option [value]="false">
+                                Não
+                            </mat-option>
+                            <mat-option [value]="true">
+                                Sim
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <button mat-raised-button color="primary" (click)="submitTodo()" style="left: 5%;">Salvar To-do</button>
+            </form>
+
+
+            <div class="mat-elevation-z8 tableAlbuns">
+                <table mat-table [dataSource]="dataSourceTodos">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- Título Column -->
+                    <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef> Título </th>
+                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    </ng-container>
+
+                    <!-- Completo Column -->
+                    <ng-container matColumnDef="completed">
+                        <th mat-header-cell *matHeaderCellDef> Completo </th>
+                        <td mat-cell *matCellDef="let element">
+                            <p *ngIf="element.completed">Sim</p>
+                            <p *ngIf="!element.completed">Não</p>
+                        </td>
+                    </ng-container>
+
+                    <!-- Corpo Column -->
+                    <ng-container matColumnDef="opt">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element"> <button mat-raised-button (click)="editarTodo (element.id);">Editar</button>
+                            <button mat-raised-button color="warn" (click)="deleteTodo(element.id);">Excluir</button></td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef=" displayedColumnsTodo "></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsTodo ; "></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20] " showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>
